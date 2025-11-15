@@ -5,15 +5,15 @@
 
 #define MAX_SIZE 100
 
-// ¶¨Òå¹Ë¿Í½á¹¹Ìå
+// å®šä¹‰é¡¾å®¢ç»“æ„ä½“
 typedef struct
 {
-    char tableType;     // ²Í×ÀÀàĞÍ
-    int num;            // ²Í×ÀĞòºÅ
-    char contact[20];   // ÁªÏµ·½Ê½
+    char tableType;     // é¤æ¡Œç±»å‹
+    int num;            // é¤æ¡Œåºå·
+    char contact[20];   // è”ç³»æ–¹å¼
 } Customer;
 
-// ¶¨ÒåÑ­»·¶ÓÁĞ½á¹¹Ìå
+// å®šä¹‰å¾ªç¯é˜Ÿåˆ—ç»“æ„ä½“
 typedef struct
 {
     Customer queue[MAX_SIZE];
@@ -21,31 +21,31 @@ typedef struct
     int rear;
 } CircularQueue;
 
-// ³õÊ¼»¯¶ÓÁĞ
+// åˆå§‹åŒ–é˜Ÿåˆ—
 void initQueue(CircularQueue* queue)
 {
     queue->front = -1;
     queue->rear = -1;
 }
 
-// ÅĞ¶Ï¶ÓÁĞÊÇ·ñÎª¿Õ
+// åˆ¤æ–­é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
 int isQueueEmpty(CircularQueue* queue)
 {
     return queue->front == -1;
 }
 
-// ÅĞ¶Ï¶ÓÁĞÊÇ·ñÒÑÂú
+// åˆ¤æ–­é˜Ÿåˆ—æ˜¯å¦å·²æ»¡
 int isQueueFull(CircularQueue* queue)
 {
     return ((queue->rear + 1) % MAX_SIZE == queue->front);
 }
 
-// Èë¶Ó²Ù×÷
+// å…¥é˜Ÿæ“ä½œ
 void enqueue(CircularQueue* queue, Customer customer)
 {
     if (isQueueFull(queue))
     {
-        printf("¶ÓÁĞÒÑÂú£¬ÎŞ·¨Èë¶Ó\n");
+        printf("é˜Ÿåˆ—å·²æ»¡ï¼Œæ— æ³•å…¥é˜Ÿ\n");
         return;
     }
     if (isQueueEmpty(queue))
@@ -60,13 +60,13 @@ void enqueue(CircularQueue* queue, Customer customer)
     queue->queue[queue->rear] = customer;
 }
 
-// ³ö¶Ó²Ù×÷
+// å‡ºé˜Ÿæ“ä½œ
 Customer dequeue(CircularQueue* queue)
 {
     Customer customer = { '\0', 0, "" };
     if (isQueueEmpty(queue))
     {
-        printf("¶ÓÁĞÒÑ¿Õ£¬ÎŞ·¨³ö¶Ó\n");
+        printf("é˜Ÿåˆ—å·²ç©ºï¼Œæ— æ³•å‡ºé˜Ÿ\n");
         return customer;
     }
     customer = queue->queue[queue->front];
@@ -82,31 +82,31 @@ Customer dequeue(CircularQueue* queue)
     return customer;
 }
 
-// »ñÈ¡¶ÓÍ·¹Ë¿ÍĞÅÏ¢
+// è·å–é˜Ÿå¤´é¡¾å®¢ä¿¡æ¯
 Customer peek(CircularQueue* queue)
 {
     Customer customer = { '\0', 0, "" };
     if (isQueueEmpty(queue))
     {
-        printf("¶ÓÁĞÒÑ¿Õ£¬Ã»ÓĞ¶ÓÍ·¹Ë¿Í\n");
+        printf("é˜Ÿåˆ—å·²ç©ºï¼Œæ²¡æœ‰é˜Ÿå¤´é¡¾å®¢\n");
         return customer;
     }
     return queue->queue[queue->front];
 }
 
-// ÏÔÊ¾¶ÓÁĞËùÓĞ¹Ë¿ÍĞÅÏ¢
+// æ˜¾ç¤ºé˜Ÿåˆ—æ‰€æœ‰é¡¾å®¢ä¿¡æ¯
 void displayQueue(CircularQueue* queue)
 {
     if (isQueueEmpty(queue))
     {
-        printf("¶ÓÁĞÎª¿Õ\n");
+        printf("é˜Ÿåˆ—ä¸ºç©º\n");
         return;
     }
     int i = queue->front;
-    printf("¶ÓÁĞÖĞµÄ¹Ë¿ÍĞÅÏ¢£º\n");
+    printf("é˜Ÿåˆ—ä¸­çš„é¡¾å®¢ä¿¡æ¯ï¼š\n");
     while (1)
     {
-        printf("²Í×ÀÀàĞÍ: %c, ²Í×ÀĞòºÅ: %d, ÁªÏµ·½Ê½: %s\n",
+        printf("é¤æ¡Œç±»å‹: %c, é¤æ¡Œåºå·: %d, è”ç³»æ–¹å¼: %s\n",
             queue->queue[i].tableType, queue->queue[i].num, queue->queue[i].contact);
         if (i == queue->rear) break;
         i = (i + 1) % MAX_SIZE;
@@ -122,38 +122,38 @@ int main()
 
     while (1)
     {
-        printf("\nÇëÑ¡Ôñ²Ù×÷£º\n");
-        printf("1. ¿ÍÈËÈë¶Ó\n");
-        printf("2. ¿ÍÈË³ö¶Ó\n");
-        printf("3. ²é¿´¶ÓÍ·¿ÍÈËĞÅÏ¢\n");
-        printf("4. ÏÔÊ¾ËùÓĞ¿ÍÈËĞÅÏ¢\n");
-        printf("5. ÍË³ö\n");
+        printf("\nè¯·é€‰æ‹©æ“ä½œï¼š\n");
+        printf("1. å®¢äººå…¥é˜Ÿ\n");
+        printf("2. å®¢äººå‡ºé˜Ÿ\n");
+        printf("3. æŸ¥çœ‹é˜Ÿå¤´å®¢äººä¿¡æ¯\n");
+        printf("4. æ˜¾ç¤ºæ‰€æœ‰å®¢äººä¿¡æ¯\n");
+        printf("5. é€€å‡º\n");
         scanf("%d", &choice);
 
         switch (choice)
         {
         case 1:
-            printf("ÇëÊäÈë²Í×ÀÀàĞÍ (A: Ğ¡×À, B: ÖĞ×À, C: ´ó×À): ");
+            printf("è¯·è¾“å…¥é¤æ¡Œç±»å‹ (A: å°æ¡Œ, B: ä¸­æ¡Œ, C: å¤§æ¡Œ): ");
             scanf(" %c", &customer.tableType);
-            printf("ÇëÊäÈë²Í×ÀĞòºÅ: ");
+            printf("è¯·è¾“å…¥é¤æ¡Œåºå·: ");
             scanf("%d", &customer.num);
-            printf("ÇëÊäÈëÁªÏµ·½Ê½: ");
+            printf("è¯·è¾“å…¥è”ç³»æ–¹å¼: ");
             scanf("%s", customer.contact);
             enqueue(&queue, customer);
-            printf("È¡ºÅ³É¹¦£¡\n");
+            printf("å–å·æˆåŠŸï¼\n");
             break;
         case 2:
             customer = dequeue(&queue);
             if (customer.tableType != '\0')
             {
-                printf("½ĞºÅ£º%c%d£¬ÁªÏµ·½Ê½£º%s\n", customer.tableType, customer.num, customer.contact);
+                printf("å«å·ï¼š%c%dï¼Œè”ç³»æ–¹å¼ï¼š%s\n", customer.tableType, customer.num, customer.contact);
             }
             break;
         case 3:
             customer = peek(&queue);
             if (customer.tableType != '\0')
             {
-                printf("µ±Ç°¶ÓÍ·¿ÍÈË - ²Í×ÀÀàĞÍ: %c, ²Í×ÀĞòºÅ: %d, ÁªÏµ·½Ê½: %s\n",
+                printf("å½“å‰é˜Ÿå¤´å®¢äºº - é¤æ¡Œç±»å‹: %c, é¤æ¡Œåºå·: %d, è”ç³»æ–¹å¼: %s\n",
                     customer.tableType, customer.num, customer.contact);
             }
             break;
@@ -161,10 +161,10 @@ int main()
             displayQueue(&queue);
             break;
         case 5:
-            printf("ÍË³öÏµÍ³\n");
+            printf("é€€å‡ºç³»ç»Ÿ\n");
             return 0;
         default:
-            printf("ÎŞĞ§µÄÑ¡Ôñ£¬ÇëÖØĞÂÊäÈë\n");
+            printf("æ— æ•ˆçš„é€‰æ‹©ï¼Œè¯·é‡æ–°è¾“å…¥\n");
         }
     }
     return 0;
