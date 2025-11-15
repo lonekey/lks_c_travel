@@ -1,2 +1,2 @@
-这是一个从零开始的c语言学习之旅（十分简洁明了），ok，废话不多说，whh加油！
-Light before Sunrise!
+一个普通编程爱好者的零开始的c学习仓库
+Light before Sunrise
