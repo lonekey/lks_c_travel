@@ -20,11 +20,11 @@ void InitList(TeacherList* list) {
 
     strcpy_s(list->teachers[0].account, sizeof(list->teachers[0].account), "teacher1");
     strcpy_s(list->teachers[0].password, sizeof(list->teachers[0].password), "123456");
-    strcpy_s(list->teachers[0].permission, sizeof(list->teachers[0].permission), "½ÌÑ§¶½µ¼");
+    strcpy_s(list->teachers[0].permission, sizeof(list->teachers[0].permission), "æ•™å­¦ç£å¯¼");
 
     strcpy_s(list->teachers[1].account, sizeof(list->teachers[1].account), "teacher2");
     strcpy_s(list->teachers[1].password, sizeof(list->teachers[1].password), "654321");
-    strcpy_s(list->teachers[1].permission, sizeof(list->teachers[1].permission), "ÆÕÍ¨½ÌÊ¦");
+    strcpy_s(list->teachers[1].permission, sizeof(list->teachers[1].permission), "æ™®é€šæ•™å¸ˆ");
 }
 
 int Login(TeacherList* list) {
@@ -32,25 +32,25 @@ int Login(TeacherList* list) {
     int logins = 0;
 
     while (logins < 2) {
-        printf("ÇëÊäÈëÕËºÅ: ");
+        printf("è¯·è¾“å…¥è´¦å·: ");
         scanf_s("%s", Account, (unsigned)sizeof(Account));
-        printf("ÇëÊäÈëÃÜÂë: ");
+        printf("è¯·è¾“å…¥å¯†ç : ");
         scanf_s("%s", Password, (unsigned)sizeof(Password));
 
         for (int i = 0; i < list->length; i++) {
             if (strcmp(Account, list->teachers[i].account) == 0 &&
                 strcmp(Password, list->teachers[i].password) == 0) {
-                printf("ÄãºÃ%s£¡ÄúµÄÈ¨ÏŞÊÇ%s\n", Account, list->teachers[i].permission);
+                printf("ä½ å¥½%sï¼æ‚¨çš„æƒé™æ˜¯%s\n", Account, list->teachers[i].permission);
                 return 1;
             }
         }
 
         logins++;
         if (logins < 2) {
-            printf("ÕËºÅ»òÃÜÂë´íÎó»¹ÓĞ%d´Î»ú»á\n", 2 - logins);
+            printf("è´¦å·æˆ–å¯†ç é”™è¯¯è¿˜æœ‰%dæ¬¡æœºä¼š\n", 2 - logins);
         }
         else {
-            printf("µÇÈëÊ§°Ü£¬³¬¹ı×î´óµÇÈë´ÎÊı£¡\n");
+            printf("ç™»å…¥å¤±è´¥ï¼Œè¶…è¿‡æœ€å¤§ç™»å…¥æ¬¡æ•°ï¼\n");
         }
     }
     return 0;
@@ -58,59 +58,59 @@ int Login(TeacherList* list) {
 
 void AddTeacher(TeacherList* list) {
     if (list->length >= MAX_TEACHERS) {
-        printf("½ÌÊ¦ÊıÁ¿ÒÑ´ïÉÏÏŞ£¡\n");
+        printf("æ•™å¸ˆæ•°é‡å·²è¾¾ä¸Šé™ï¼\n");
         return;
     }
 
-    printf("ÇëÊäÈëÕËºÅ: ");
+    printf("è¯·è¾“å…¥è´¦å·: ");
     scanf_s("%s", list->teachers[list->length].account, (unsigned)sizeof(list->teachers[list->length].account));
-    printf("ÇëÊäÈëÃÜÂë: ");
+    printf("è¯·è¾“å…¥å¯†ç : ");
     scanf_s("%s", list->teachers[list->length].password, (unsigned)sizeof(list->teachers[list->length].password));
-    printf("ÇëÊäÈëÈ¨ÏŞ: ");
+    printf("è¯·è¾“å…¥æƒé™: ");
     scanf_s("%s", list->teachers[list->length].permission, (unsigned)sizeof(list->teachers[list->length].permission));
 
     list->length++;
-    printf("ĞÂ½ÌÊ¦Ìí¼Ó³É¹¦£¡\n");
+    printf("æ–°æ•™å¸ˆæ·»åŠ æˆåŠŸï¼\n");
 }
 
 void DeleteTeacher(TeacherList* list) {
     char deleteaccount[20];
     int found = 0;
 
-    printf("ÇëÊäÈëÒªÉ¾³ıµÄ½ÌÊ¦ÕËºÅ: ");
+    printf("è¯·è¾“å…¥è¦åˆ é™¤çš„æ•™å¸ˆè´¦å·: ");
     scanf_s("%s", deleteaccount, (unsigned)sizeof(deleteaccount));
 
     for (int i = 0; i < list->length; i++) {
         if (strcmp(deleteaccount, list->teachers[i].account) == 0) {
-            // ½«ºóÃæµÄ½ÌÊ¦Ç°ÒÆ
+            // å°†åé¢çš„æ•™å¸ˆå‰ç§»
             for (int j = i; j < list->length - 1; j++) {
                 list->teachers[j] = list->teachers[j + 1];
             }
             list->length--;
             found = 1;
-            printf("½ÌÊ¦ÕËºÅ%sÒÑÉ¾³ı£¡\n", deleteaccount);
+            printf("æ•™å¸ˆè´¦å·%så·²åˆ é™¤ï¼\n", deleteaccount);
             break;
         }
     }
 
     if (!found) {
-        printf("Î´ÕÒµ½¸Ã½ÌÊ¦ÕËºÅ£º%s\n", deleteaccount);
+        printf("æœªæ‰¾åˆ°è¯¥æ•™å¸ˆè´¦å·ï¼š%s\n", deleteaccount);
     }
 }
 
 void Menu() {
-    printf("\n½ÌÑ§ÖÊÁ¿ÆÀ¼ÛÏµÍ³\n");
-    printf("1. Ìí¼Ó½ÌÊ¦\n");
-    printf("2. É¾³ı½ÌÊ¦\n");
-    printf("0. ÍË³öÏµÍ³\n");
-    printf("ÇëÑ¡Ôñ²Ù×÷: ");
+    printf("\næ•™å­¦è´¨é‡è¯„ä»·ç³»ç»Ÿ\n");
+    printf("1. æ·»åŠ æ•™å¸ˆ\n");
+    printf("2. åˆ é™¤æ•™å¸ˆ\n");
+    printf("0. é€€å‡ºç³»ç»Ÿ\n");
+    printf("è¯·é€‰æ‹©æ“ä½œ: ");
 }
 
 int main() {
     TeacherList list;
     InitList(&list);
 
-    printf("»¶Ó­µÇÈë½ÌÑ§ÖÊÁ¿ÆÀ¼ÛÏµÍ³\n");
+    printf("æ¬¢è¿ç™»å…¥æ•™å­¦è´¨é‡è¯„ä»·ç³»ç»Ÿ\n");
 
     if (Login(&list)) {
         int choice;
@@ -126,10 +126,10 @@ int main() {
                 DeleteTeacher(&list);
                 break;
             case 0:
-                printf("ÍË³öÏµÍ³£¬¸ĞĞ»Ê¹ÓÃ£¡\n");
+                printf("é€€å‡ºç³»ç»Ÿï¼Œæ„Ÿè°¢ä½¿ç”¨ï¼\n");
                 break;
             default:
-                printf("ÎŞĞ§²Ù×÷£¬ÇëÖØĞÂÊäÈë£¡\n");
+                printf("æ— æ•ˆæ“ä½œï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
                 break;
             }
         } while (choice != 0);
