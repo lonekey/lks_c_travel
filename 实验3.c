@@ -1,50 +1,50 @@
-#define _CRT_NO_SECURE_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 
 #define MAX_SIZE 100
 
-//¶¨ÒåÕ»
+//å®šä¹‰æ ˆ
 typedef struct
 {
 	int data[MAX_SIZE];
 	int top;
 }Stack;
 
-//³õÊ¼»¯Õ»
+//åˆå§‹åŒ–æ ˆ
 void initStack(Stack* s)
 {
 	s->top = -1;
 }
-//ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
+//åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
 int isEmpty(Stack* s)
 {
 	return s->top == -1;
 }
 
-//ÅĞ¶ÏÕ»ÊÇ·ñÂú
+//åˆ¤æ–­æ ˆæ˜¯å¦æ»¡
 int isFull(Stack* s)
 {
 	return s->top == MAX_SIZE - 1;
 }
 
-//ÈëÕ»
+//å…¥æ ˆ
 void push(Stack* s, int value)
 {
 	if (isFull(s))
 	{
-		printf("Õ»ÒÑÂú£¬ÎŞ·¨ÈëÕ»\n");
+		printf("æ ˆå·²æ»¡ï¼Œæ— æ³•å…¥æ ˆ\n");
 		return;
 	}
 	s->data[++(s -> top)] = value;
 }
 
-//³öÕ»
+//å‡ºæ ˆ
 void pop(Stack* s,int value)
 {
 	if (isEmpty(s))
 	{
-		printf("Õ»ÒÑ¿Õ£¬ÎŞ·¨³öÕ»\n");
+		printf("æ ˆå·²ç©ºï¼Œæ— æ³•å‡ºæ ˆ\n");
 		return;
 	}
 	s->data[(s->top)--] = value;
@@ -60,7 +60,7 @@ void decimalToBinary(int n)
 		push(&s, remainder);
 		n = n / 2;
 	}
-	printf("×ª»»ºóµÄ¶ş½øÖÆÊıÎª£º");
+	printf("è½¬æ¢åçš„äºŒè¿›åˆ¶æ•°ä¸ºï¼š");
 	while (!isEmpty(&s))
 	{
 		int binaryDigit = s.data[s.top];
@@ -73,8 +73,9 @@ void decimalToBinary(int n)
 int main()
 {
 	int decimal;
-	printf("ÇëÊäÈëÒ»¸öÊ®½øÖÆÕûÊı£º\n");
+	printf("è¯·è¾“å…¥ä¸€ä¸ªåè¿›åˆ¶æ•´æ•°ï¼š\n");
 	scanf_s("%d", &decimal);
 	decimalToBinary(decimal);
 	return 0;
+
 }
