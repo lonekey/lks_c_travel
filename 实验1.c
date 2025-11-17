@@ -17,14 +17,14 @@ typedef struct {
 
 void InitList(TeacherList* list) {
     list->length = 2;
+    
+    strcpy(list->teachers[0].account,"teacher1");
+    strcpy(list->teachers[0].password,"123456");
+    strcpy(list->teachers[0].permission,"教学督导");
 
-    strcpy_s(list->teachers[0].account, sizeof(list->teachers[0].account), "teacher1");
-    strcpy_s(list->teachers[0].password, sizeof(list->teachers[0].password), "123456");
-    strcpy_s(list->teachers[0].permission, sizeof(list->teachers[0].permission), "教学督导");
-
-    strcpy_s(list->teachers[1].account, sizeof(list->teachers[1].account), "teacher2");
-    strcpy_s(list->teachers[1].password, sizeof(list->teachers[1].password), "654321");
-    strcpy_s(list->teachers[1].permission, sizeof(list->teachers[1].permission), "普通教师");
+    strcpy(list->teachers[1].account,"teacher2");
+    strcpy(list->teachers[1].password,"654321");
+    strcpy(list->teachers[1].permission,"普通教师");
 }
 
 int Login(TeacherList* list) {
@@ -33,9 +33,9 @@ int Login(TeacherList* list) {
 
     while (logins < 2) {
         printf("请输入账号: ");
-        scanf_s("%s", Account, (unsigned)sizeof(Account));
+        scanf("%s", Account, (unsigned)sizeof(Account));
         printf("请输入密码: ");
-        scanf_s("%s", Password, (unsigned)sizeof(Password));
+        scanf("%s", Password, (unsigned)sizeof(Password));
 
         for (int i = 0; i < list->length; i++) {
             if (strcmp(Account, list->teachers[i].account) == 0 &&
@@ -63,11 +63,11 @@ void AddTeacher(TeacherList* list) {
     }
 
     printf("请输入账号: ");
-    scanf_s("%s", list->teachers[list->length].account, (unsigned)sizeof(list->teachers[list->length].account));
+    scanf("%s", list->teachers[list->length].account, (unsigned)sizeof(list->teachers[list->length].account));
     printf("请输入密码: ");
-    scanf_s("%s", list->teachers[list->length].password, (unsigned)sizeof(list->teachers[list->length].password));
+    scanf("%s", list->teachers[list->length].password, (unsigned)sizeof(list->teachers[list->length].password));
     printf("请输入权限: ");
-    scanf_s("%s", list->teachers[list->length].permission, (unsigned)sizeof(list->teachers[list->length].permission));
+    scanf("%s", list->teachers[list->length].permission, (unsigned)sizeof(list->teachers[list->length].permission));
 
     list->length++;
     printf("新教师添加成功！\n");
@@ -116,7 +116,7 @@ int main() {
         int choice;
         do {
             Menu();
-            scanf_s("%d", &choice);
+            scanf("%d", &choice);
 
             switch (choice) {
             case 1:
@@ -137,3 +137,4 @@ int main() {
 
     return 0;
 }
+
