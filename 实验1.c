@@ -33,9 +33,9 @@ int Login(TeacherList* list) {
 
     while (logins < 2) {
         printf("请输入账号: ");
-        scanf("%s", Account, (unsigned)sizeof(Account));
+        scanf("%s", &Account);
         printf("请输入密码: ");
-        scanf("%s", Password, (unsigned)sizeof(Password));
+        scanf("%s", &Password);
 
         for (int i = 0; i < list->length; i++) {
             if (strcmp(Account, list->teachers[i].account) == 0 &&
@@ -63,11 +63,11 @@ void AddTeacher(TeacherList* list) {
     }
 
     printf("请输入账号: ");
-    scanf("%s", list->teachers[list->length].account, (unsigned)sizeof(list->teachers[list->length].account));
+    scanf("%s", list->teachers[list->length].account);
     printf("请输入密码: ");
-    scanf("%s", list->teachers[list->length].password, (unsigned)sizeof(list->teachers[list->length].password));
+    scanf("%s", list->teachers[list->length].password);
     printf("请输入权限: ");
-    scanf("%s", list->teachers[list->length].permission, (unsigned)sizeof(list->teachers[list->length].permission));
+    scanf("%s", list->teachers[list->length].permission);
 
     list->length++;
     printf("新教师添加成功！\n");
@@ -81,8 +81,8 @@ void DeleteTeacher(TeacherList* list) {
     scanf_s("%s", deleteaccount, (unsigned)sizeof(deleteaccount));
 
     for (int i = 0; i < list->length; i++) {
-        if (strcmp(deleteaccount, list->teachers[i].account) == 0) {
-            // 将后面的教师前移
+        if (strcmp(deleteaccount, list->teachers[i].account) == 0)
+        {
             for (int j = i; j < list->length - 1; j++) {
                 list->teachers[j] = list->teachers[j + 1];
             }
@@ -137,5 +137,6 @@ int main() {
 
     return 0;
 }
+
 
 
